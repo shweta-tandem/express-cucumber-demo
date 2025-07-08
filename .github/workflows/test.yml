@@ -10,25 +10,26 @@ on:
 jobs:
   run-tests:
     runs-on: ubuntu-latest
-  steps:
-      - name: Checkout repo
-        uses: actions/checkout@v3
-      
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 20.19.3
-      
-      - name: Install dependencies
-        run: npm ci
-      
-      - name: Run Cucumber BDD tests
-        run: |
-          mkdir -p test-report
-          npx cucumber-js --format html:report/cucumber-report.html
-      
-      - name: Upload HTML test report
-        uses: actions/upload-artifact@v4
-        with:
-          name: cucumber-report
-          path: report/cucumber-report.html
+  
+    steps:
+        - name: Checkout repo
+          uses: actions/checkout@v3
+        
+        - name: Setup Node.js
+          uses: actions/setup-node@v3
+          with:
+            node-version: 20.19.3
+        
+        - name: Install dependencies
+          run: npm ci
+        
+        - name: Run Cucumber BDD tests
+          run: |
+            mkdir -p test-report
+            npx cucumber-js --format html:report/cucumber-report.html
+        
+        - name: Upload HTML test report
+          uses: actions/upload-artifact@v4
+          with:
+            name: cucumber-report
+            path: report/cucumber-report.html
